@@ -1,5 +1,5 @@
 {
-    "version": "1.0.0",
+    "version": "1.0.1",
     "title": "2GIS.ChmLibCore",
     "description": "C# port of CHMLib for .NET Core",
     "copyright": "2GIS",
