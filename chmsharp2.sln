@@ -1,29 +1,65 @@
-
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "libchmsharp2", "libchmsharp2\libchmsharp2.csproj", "{D918A9C9-BE7D-4025-A2A0-09CF6EB18762}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "test", "test\test.csproj", "{0430E871-139B-48EF-950C-19E1513FE525}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Packaging", "Packaging", "{90FED6CD-746B-4980-90D9-91FC6144E811}"
+EndProject
+Project("{FF286327-C783-4F7A-AB73-9BCBAD0D4460}") = "chmsharp2", "Packaging\chmsharp2\chmsharp2.nuproj", "{E7FA37E9-52A1-4A08-BB2E-8572B1296F35}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "2GIS.ChmLibCore", "2GIS.ChmLibCore\2GIS.ChmLibCore.xproj", "{97892DA9-D080-4F6C-B915-9D5D13B85FA8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
 		Signed Debug|Any CPU = Signed Debug|Any CPU
 		Signed Release|Any CPU = Signed Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{0430E871-139B-48EF-950C-19E1513FE525}.Signed Debug|Any CPU.ActiveCfg = Signed Debug|Any CPU
-		{0430E871-139B-48EF-950C-19E1513FE525}.Signed Debug|Any CPU.Build.0 = Signed Debug|Any CPU
-		{0430E871-139B-48EF-950C-19E1513FE525}.Signed Release|Any CPU.ActiveCfg = Signed Release|Any CPU
-		{0430E871-139B-48EF-950C-19E1513FE525}.Signed Release|Any CPU.Build.0 = Signed Release|Any CPU
+		{D918A9C9-BE7D-4025-A2A0-09CF6EB18762}.Debug|Any CPU.ActiveCfg = Signed Debug|Any CPU
+		{D918A9C9-BE7D-4025-A2A0-09CF6EB18762}.Debug|Any CPU.Build.0 = Signed Debug|Any CPU
+		{D918A9C9-BE7D-4025-A2A0-09CF6EB18762}.Release|Any CPU.ActiveCfg = Signed Release|Any CPU
+		{D918A9C9-BE7D-4025-A2A0-09CF6EB18762}.Release|Any CPU.Build.0 = Signed Release|Any CPU
 		{D918A9C9-BE7D-4025-A2A0-09CF6EB18762}.Signed Debug|Any CPU.ActiveCfg = Signed Debug|Any CPU
 		{D918A9C9-BE7D-4025-A2A0-09CF6EB18762}.Signed Debug|Any CPU.Build.0 = Signed Debug|Any CPU
 		{D918A9C9-BE7D-4025-A2A0-09CF6EB18762}.Signed Release|Any CPU.ActiveCfg = Signed Release|Any CPU
 		{D918A9C9-BE7D-4025-A2A0-09CF6EB18762}.Signed Release|Any CPU.Build.0 = Signed Release|Any CPU
-	EndGlobalSection
-	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = test\test.csproj
+		{0430E871-139B-48EF-950C-19E1513FE525}.Debug|Any CPU.ActiveCfg = Signed Debug|Any CPU
+		{0430E871-139B-48EF-950C-19E1513FE525}.Debug|Any CPU.Build.0 = Signed Debug|Any CPU
+		{0430E871-139B-48EF-950C-19E1513FE525}.Release|Any CPU.ActiveCfg = Signed Release|Any CPU
+		{0430E871-139B-48EF-950C-19E1513FE525}.Release|Any CPU.Build.0 = Signed Release|Any CPU
+		{0430E871-139B-48EF-950C-19E1513FE525}.Signed Debug|Any CPU.ActiveCfg = Signed Debug|Any CPU
+		{0430E871-139B-48EF-950C-19E1513FE525}.Signed Debug|Any CPU.Build.0 = Signed Debug|Any CPU
+		{0430E871-139B-48EF-950C-19E1513FE525}.Signed Release|Any CPU.ActiveCfg = Signed Release|Any CPU
+		{0430E871-139B-48EF-950C-19E1513FE525}.Signed Release|Any CPU.Build.0 = Signed Release|Any CPU
+		{E7FA37E9-52A1-4A08-BB2E-8572B1296F35}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7FA37E9-52A1-4A08-BB2E-8572B1296F35}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7FA37E9-52A1-4A08-BB2E-8572B1296F35}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7FA37E9-52A1-4A08-BB2E-8572B1296F35}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7FA37E9-52A1-4A08-BB2E-8572B1296F35}.Signed Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7FA37E9-52A1-4A08-BB2E-8572B1296F35}.Signed Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7FA37E9-52A1-4A08-BB2E-8572B1296F35}.Signed Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7FA37E9-52A1-4A08-BB2E-8572B1296F35}.Signed Release|Any CPU.Build.0 = Release|Any CPU
+		{97892DA9-D080-4F6C-B915-9D5D13B85FA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97892DA9-D080-4F6C-B915-9D5D13B85FA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97892DA9-D080-4F6C-B915-9D5D13B85FA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97892DA9-D080-4F6C-B915-9D5D13B85FA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97892DA9-D080-4F6C-B915-9D5D13B85FA8}.Signed Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97892DA9-D080-4F6C-B915-9D5D13B85FA8}.Signed Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97892DA9-D080-4F6C-B915-9D5D13B85FA8}.Signed Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97892DA9-D080-4F6C-B915-9D5D13B85FA8}.Signed Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E7FA37E9-52A1-4A08-BB2E-8572B1296F35} = {90FED6CD-746B-4980-90D9-91FC6144E811}
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = test\test.csproj
 	EndGlobalSection
 EndGlobal
