@@ -27,7 +27,7 @@ using System.Threading;
 namespace CHMsharp
 {
     internal struct ChmFileInfo {
-        public FileStream fd;
+        public Stream fd;
 
         public Mutex mutex;
         public Mutex lzx_mutex;

@@ -18,9 +18,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
 using System.Threading;
 
@@ -35,19 +33,25 @@ namespace CHMsharp
         private const int CHM_MAX_BLOCKS_CACHED = 5;
 
         private ChmFileInfo _h;
-        private string _filename;
 
-        private ChmFile(string filename)
+        /// <summary>
+        /// Prevents a default instance of the <see cref="ChmFile"/> class from being created.
+        /// </summary>
+        private ChmFile()
         {
             _h = new ChmFileInfo();
-            _filename = filename;
         }
 
-        /* close an ITS archive */
+        /// <summary>
+        /// close an ITS archive
+        /// </summary>
         public void Close()
-        { 
+        {
             if (_h.fd != null)
+            {
                 _h.fd.Dispose();
+            }
+
             _h.fd = null;
 
             if (_h.lzx_state != null)
@@ -58,24 +62,30 @@ namespace CHMsharp
             _h.cache_block_indices = null;
         }
 
-        /* enumerate the objects in the .chm archive */
+        /// <summary>
+        /// enumerate the objects in the .chm archive
+        /// </summary>
+        /// <param name="what"></param>
+        /// <param name="e"></param>
+        /// <param name="context"></param>
+        /// <returns></returns>
         public bool Enumerate(EnumerateLevel what, ChmEnumerator e, object context)
         {
-            Int32 curPage;
+            int curPage;
 
             /* buffer to hold whatever page we're looking at */
             /* RWE 6/12/2003 */
-            byte[] page_buf = new byte[_h.block_len];
-            chmPmglHeader header = new chmPmglHeader();
+            var page_buf = new byte[_h.block_len];
+            var header = new chmPmglHeader();
             uint end;
             uint cur;
             uint lenRemain;
-            UInt64 ui_path_len;
+            ulong ui_path_len;
 
             /* the current ui */
-            ChmUnitInfo ui = new ChmUnitInfo();
-            int type_bits = ((int)what & 0x7);
-            int filter_bits = ((int)what & 0xF8);
+            var ui = new ChmUnitInfo();
+            var type_bits = (int)what & 0x7;
+            var filter_bits = (int)what & 0xF8;
 
             /* starting page */
             curPage = _h.index_head;
@@ -94,7 +104,7 @@ namespace CHMsharp
                 lenRemain = Pmgl.CHM_PMGL_LEN;
                 if (!Pmgl.UnmarshalPmglHeader(ref page_buf, ref cur, ref lenRemain, ref header))
                     return false;
-                end = _h.block_len - (header.free_space);
+                end = _h.block_len - header.free_space;
 
                 /* loop over this page */
                 while (cur < end) {
@@ -132,7 +142,7 @@ namespace CHMsharp
                         continue;
 
                     /* call the enumerator */
-                    EnumerateStatus status = e(this, ui, context);
+                    var status = e(this, ui, context);
                     switch (status) {
                         case EnumerateStatus.Failure:
                             return false;
@@ -155,27 +165,34 @@ namespace CHMsharp
             return true;
         }
 
-        public static ChmFile Open(string filename)
+        public static ChmFile Open(string fileName)
         {
-            byte[] sbuffer = new byte[256];
+            /* open file */
+            var stream = File.Open(fileName, FileMode.Open, FileAccess.Read);
+            return Open(stream);
+        }
+
+        public static ChmFile Open(Stream stream)
+        {
+            var sbuffer = new byte[256];
             uint sremain;
             uint sbufpos;
-            chmItsfHeader itsfHeader = new chmItsfHeader();
-            chmItspHeader itspHeader = new chmItspHeader();
-            ChmUnitInfo uiLzxc = new ChmUnitInfo();
-            chmLzxcControlData ctlData = new chmLzxcControlData();
-            ChmFile chmf = new ChmFile(filename);
+            var itsfHeader = new chmItsfHeader();
+            var itspHeader = new chmItspHeader();
+            var uiLzxc = new ChmUnitInfo();
+            var ctlData = new chmLzxcControlData();
+            var chmf = new ChmFile
+                           {
+                               _h =
+                                   {
+                                       fd = stream,
+                                       lzx_state = null,
+                                       cache_blocks = null,
+                                       cache_block_indices = null,
+                                       cache_num_blocks = 0
+                                   }
+                           };
 
-            /* allocate handle */
-            chmf._h.fd = null;
-            chmf._h.lzx_state = null;
-            chmf._h.cache_blocks = null;
-            chmf._h.cache_block_indices = null;
-            chmf._h.cache_num_blocks = 0;
-
-            /* open file */
-            chmf._h.fd = File.Open(filename, FileMode.Open, FileAccess.Read);
-            
             /* initialize mutexes, if needed */
             chmf._h.mutex = new Mutex();
             chmf._h.lzx_mutex = new Mutex();
@@ -281,18 +298,22 @@ namespace CHMsharp
             return chmf;
         }
 
-        /* resolve a particular object from the archive */
+        /// <summary>
+        /// resolve a particular object from the archive
+        /// </summary>
+        /// <param name="objPath"></param>
+        /// <param name="ui"></param>
+        /// <returns></returns>
         public bool ResolveObject(string objPath, ref ChmUnitInfo ui)
         {
             /*
              * XXX: implement caching scheme for dir pages
              */
-
-            Int32 curPage;
+            int curPage;
 
             /* buffer to hold whatever page we're looking at */
             /* RWE 6/12/2003 */
-            byte[] page_buf = new byte[_h.block_len];
+            var page_buf = new byte[_h.block_len];
 
             /* starting page */
             curPage = _h.index_root;
@@ -308,12 +329,12 @@ namespace CHMsharp
                 /* now, if it is a leaf node: */
                 if (ASCIIEncoding.UTF8.GetString(page_buf, 0, 4).CompareTo(Pmgl.CHM_PMGL_MARKER) == 0) {
                     /* scan block */
-                    long pEntry = Pmgl.FindInPmgl(page_buf, _h.block_len, objPath);
+                    var pEntry = Pmgl.FindInPmgl(page_buf, _h.block_len, objPath);
                     if (pEntry < 0)
                         return false;
 
                     /* parse entry and return */
-                    uint os = (uint)pEntry;
+                    var os = (uint)pEntry;
                     Pmgl.ParsePgmlEntry(page_buf, ref os, ref ui);
                     return true;
                 }
@@ -331,8 +352,15 @@ namespace CHMsharp
             return false;
         }
 
-        /* retrieve (part of) an object */
-        public LONGINT64 RetrieveObject(ChmUnitInfo ui, ref byte[] buf, LONGUINT64 addr, LONGINT64 len)
+        /// <summary>
+        /// retrieve (part of) an object
+        /// </summary>
+        /// <param name="ui"></param>
+        /// <param name="buf"></param>
+        /// <param name="addr"></param>
+        /// <param name="len"></param>
+        /// <returns></returns>
+        public long RetrieveObject(ChmUnitInfo ui, ref byte[] buf, ulong addr, long len)
         {
             /* must be valid file handle */
             if (_h.fd == null)
@@ -357,8 +385,8 @@ namespace CHMsharp
             /* else if the file is compressed, it's a little trickier */
             else /* ui->space == CHM_COMPRESSED */
             {
-                Int64 swath = 0, total = 0;
-                UInt64 bufpos = 0;
+                long swath = 0, total = 0;
+                ulong bufpos = 0;
 
                 /* if compression is not enabled for this file... */
                 if (!_h.compression_enabled)
@@ -378,21 +406,24 @@ namespace CHMsharp
                     addr += (LONGUINT64)swath;
                     bufpos += (LONGUINT64)swath;
 
-                } while (len != 0);
+                }
+ while (len != 0);
 
                 return total;
             }
         }
 
-        /*
-         * set a parameter on the file handle.
-         * valid parameter types:
-         *          CHM_PARAM_MAX_BLOCKS_CACHED:
-         *                 how many decompressed blocks should be cached?  A simple
-         *                 caching scheme is used, wherein the index of the block is
-         *                 used as a hash value, and hash collision results in the
-         *                 invalidation of the previously cached block.
-         */
+        /// <summary>
+        /// set a parameter on the file handle.
+        /// valid parameter types:
+        ///          CHM_PARAM_MAX_BLOCKS_CACHED:
+        ///                 how many decompressed blocks should be cached? A simple
+        ///                 aching scheme is used, wherein the index of the block is
+        ///                 used as a hash value, and hash collision results in the
+        ///                 invalidation of the previously cached block.
+        /// </summary>
+        /// <param name="paramType"></param>
+        /// <param name="paramVal"></param>
         public void SetParam(int paramType, int paramVal)
         {
             switch (paramType) {
@@ -400,12 +431,12 @@ namespace CHMsharp
                     _h.cache_mutex.WaitOne();
                     if (paramVal != _h.cache_num_blocks) {
                         byte[][] newBlocks;
-                        UInt64[] newIndices;
+                        ulong[] newIndices;
                         int i;
 
                         /* allocate new cached blocks */
                         newBlocks = new byte[paramVal][];
-                        newIndices = new UInt64[paramVal];
+                        newIndices = new ulong[paramVal];
                         for (i = 0; i < paramVal; i++) {
                             newBlocks[i] = null;
                             newIndices[i] = 0;
@@ -414,7 +445,7 @@ namespace CHMsharp
                         /* re-distribute old cached blocks */
                         if (_h.cache_blocks != null) {
                             for (i = 0; i < _h.cache_num_blocks; i++) {
-                                int newSlot = (int)(_h.cache_block_indices[i] % (UInt64)paramVal);
+                                var newSlot = (int)(_h.cache_block_indices[i] % (UInt64)paramVal);
 
                                 if (_h.cache_blocks[i] != null) {
                                     /* in case of collision, destroy newcomer */
@@ -434,17 +465,13 @@ namespace CHMsharp
                         _h.cache_block_indices = newIndices;
                         _h.cache_num_blocks = paramVal;
                     }
+
                     _h.cache_mutex.ReleaseMutex();
                     break;
 
                 default:
                     break;
             }
-        }
-
-        public string FileName
-        {
-            get { return _filename; }
         }
     }
 }

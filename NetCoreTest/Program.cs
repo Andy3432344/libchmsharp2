@@ -9,6 +9,7 @@ namespace NetCoreTest
     public class Program
     {
         private static string _outdir;
+        private static string _fileName;
 
         public static void Main(string[] args)
         {
@@ -44,9 +45,9 @@ namespace NetCoreTest
                 _outdir = args[1];
             }
 
+            _fileName = args[0];
             var o = new object();
-
-            var chmf = ChmFile.Open(args[0]);
+            var chmf = ChmFile.Open(_fileName);
             chmf.Enumerate(
                 EnumerateLevel.Normal,
                 EnumeratorCallback,
@@ -58,7 +59,7 @@ namespace NetCoreTest
         {
             if (!ui.path.EndsWith("/"))
             {
-                Console.WriteLine(file.FileName + ": " + ui.path);
+                Console.WriteLine(_fileName + ": " + ui.path);
             }
 
             if (ui.length > 0)
