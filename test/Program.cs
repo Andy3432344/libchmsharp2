@@ -33,28 +33,35 @@ namespace test
 
         static void Main(string[] args)
         {
-            if (args.Length != 1 && args.Length != 2) {
+            if (args.Length != 1 && args.Length != 2)
+            {
                 Console.WriteLine("USAGE: test.exe <input file> [ <output directory> ]");
                 return;
             }
 
             // check if we can find the source file
-            if(!File.Exists(args[0]))
+            if (!File.Exists(args[0]))
             {
                 Console.WriteLine("ERROR: cannot find " + args[0]);
                 return;
             }
 
             // check if an output directory was specified
-            if(args.Length == 1) {
+            if (args.Length == 1)
+            {
                 _outdir = Path.Combine(Path.GetDirectoryName(args[0]), Path.GetFileNameWithoutExtension(args[0]));
-                if(!Directory.Exists(_outdir)) {
+                if (!Directory.Exists(_outdir))
+                {
                     Console.WriteLine("Creating output folder: " + _outdir);
                     Directory.CreateDirectory(_outdir);
-                } else {
+                }
+                else
+                {
                     Console.WriteLine("Using output folder: " + _outdir);
                 }
-            } else {
+            }
+            else
+            {
                 _outdir = args[1];
             }
 
@@ -72,20 +79,24 @@ namespace test
             if (!ui.path.EndsWith("/"))
                 Console.WriteLine(_fileName + ": " + ui.path);
 
-            if (ui.length > 0) {
-                byte[] buf = new byte[ui.length];
-                long ret = file.RetrieveObject(ui, ref buf, 0, buf.Length);
+            if (ui.length > 0)
+            {
+                var buf = new byte[ui.length];
+                var ret = file.RetrieveObject(ui, ref buf, 0, buf.Length);
 
-                if (ret > 0) {
-                    try {
-                        FileInfo fi =
-                            new FileInfo(Path.Combine(_outdir, ui.path.Trim('/')));
+                if (ret > 0)
+                {
+                    try
+                    {
+                        var fi = new FileInfo(Path.Combine(_outdir, ui.path.Trim('/')));
                             
                         List<DirectoryInfo> created;
 
                         fi.Directory.CreateDirectory(out created);
                         File.WriteAllBytes(fi.FullName, buf);
-                    } catch (ArgumentException ex) {
+                    }
+                    catch (ArgumentException ex)
+                    {
                         Console.WriteLine(ex.Message);
                     }
                 }
