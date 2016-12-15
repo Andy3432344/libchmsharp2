@@ -6,7 +6,9 @@
     "authors": [ "2GIS" ],
     "packOptions": {
         "summary": "C# port of CHMLib for .NET Core",
+        "projectUrl": "https://github.com/2gis/libchmsharp2",
         "repository": {
+            "type": "git",
             "url": "https://github.com/2gis/libchmsharp2"
         },
         "tags": [ "2GIS", "libchmsharp2", "chmsharp2", "chm", "lzx" ]

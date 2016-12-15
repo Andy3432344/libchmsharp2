@@ -65,10 +65,10 @@ namespace CHMsharp
         /// <summary>
         /// enumerate the objects in the .chm archive
         /// </summary>
-        /// <param name="what"></param>
-        /// <param name="e"></param>
-        /// <param name="context"></param>
-        /// <returns></returns>
+        /// <param name="what">enumerate filter</param>
+        /// <param name="e">enumerate callback</param>
+        /// <param name="context">callback context</param>
+        /// <returns>true if enumerate succeeded</returns>
         public bool Enumerate(EnumerateLevel what, ChmEnumerator e, object context)
         {
             int curPage;
