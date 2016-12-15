@@ -49,7 +49,11 @@ namespace CHMsharp
         {
             if (_h.fd != null)
             {
+#if NETSTANDARD1_4
                 _h.fd.Dispose();
+#else
+                _h.fd.Close();
+#endif
             }
 
             _h.fd = null;

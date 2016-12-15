@@ -42,22 +42,55 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EnumerateStatus.cs" />
-    <Compile Include="EnumerateLevel.cs" />
-    <Compile Include="Storage.cs" />
-    <Compile Include="Itsf.cs" />
-    <Compile Include="Itsp.cs" />
-    <Compile Include="Lzxc.cs" />
-    <Compile Include="Pmgi.cs" />
-    <Compile Include="Pmgl.cs" />
-    <Compile Include="Lzx.cs" />
+    <Compile Include="..\2GIS.ChmLibCore\chmEnumerator.cs">
+      <Link>chmEnumerator.cs</Link>
+    </Compile>
+    <Compile Include="..\2GIS.ChmLibCore\chmFile.cs">
+      <Link>chmFile.cs</Link>
+    </Compile>
+    <Compile Include="..\2GIS.ChmLibCore\ChmFileInfo.cs">
+      <Link>ChmFileInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\2GIS.ChmLibCore\chmUnitInfo.cs">
+      <Link>chmUnitInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\2GIS.ChmLibCore\EnumerateLevel.cs">
+      <Link>EnumerateLevel.cs</Link>
+    </Compile>
+    <Compile Include="..\2GIS.ChmLibCore\EnumerateStatus.cs">
+      <Link>EnumerateStatus.cs</Link>
+    </Compile>
+    <Compile Include="..\2GIS.ChmLibCore\EnumeratorContext.cs">
+      <Link>EnumeratorContext.cs</Link>
+    </Compile>
+    <Compile Include="..\2GIS.ChmLibCore\Itsf.cs">
+      <Link>Itsf.cs</Link>
+    </Compile>
+    <Compile Include="..\2GIS.ChmLibCore\Itsp.cs">
+      <Link>Itsp.cs</Link>
+    </Compile>
+    <Compile Include="..\2GIS.ChmLibCore\Lzx.cs">
+      <Link>Lzx.cs</Link>
+    </Compile>
+    <Compile Include="..\2GIS.ChmLibCore\Lzxc.cs">
+      <Link>Lzxc.cs</Link>
+    </Compile>
+    <Compile Include="..\2GIS.ChmLibCore\Pmgi.cs">
+      <Link>Pmgi.cs</Link>
+    </Compile>
+    <Compile Include="..\2GIS.ChmLibCore\Pmgl.cs">
+      <Link>Pmgl.cs</Link>
+    </Compile>
+    <Compile Include="..\2GIS.ChmLibCore\Storage.cs">
+      <Link>Storage.cs</Link>
+    </Compile>
+    <Compile Include="..\2GIS.ChmLibCore\System.cs">
+      <Link>System.cs</Link>
+    </Compile>
+    <Compile Include="..\2GIS.ChmLibCore\Unmarshal.cs">
+      <Link>Unmarshal.cs</Link>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="System.cs" />
-    <Compile Include="Unmarshal.cs" />
-    <Compile Include="ChmEnumerator.cs" />
-    <Compile Include="ChmFile.cs" />
-    <Compile Include="ChmUnitInfo.cs" />
-    <Compile Include="ChmFileInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
