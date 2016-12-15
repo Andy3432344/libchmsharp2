@@ -23,5 +23,5 @@ namespace CHMsharp
     public delegate EnumerateStatus ChmEnumerator(
         ChmFile f,
         ChmUnitInfo ui,
-        object context);
+        EnumeratorContext context);
 }

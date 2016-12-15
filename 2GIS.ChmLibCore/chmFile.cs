@@ -67,9 +67,9 @@ namespace CHMsharp
         /// </summary>
         /// <param name="what">enumerate filter</param>
         /// <param name="e">enumerate callback</param>
-        /// <param name="context">callback context</param>
+        /// <param name="context">enumerate callback context</param>
         /// <returns>true if enumerate succeeded</returns>
-        public bool Enumerate(EnumerateLevel what, ChmEnumerator e, object context)
+        public bool Enumerate(EnumerateLevel what, ChmEnumerator e, EnumeratorContext context)
         {
             int curPage;
 

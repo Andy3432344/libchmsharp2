@@ -46,12 +46,11 @@ namespace NetCoreTest
             }
 
             _fileName = args[0];
-            var o = new object();
             var chmf = ChmFile.Open(_fileName);
             chmf.Enumerate(
                 EnumerateLevel.Normal,
                 EnumeratorCallback,
-                o);
+                new EnumeratorContext());
             chmf.Close();
         }
 
