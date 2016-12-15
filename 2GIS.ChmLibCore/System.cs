@@ -19,9 +19,7 @@
  */
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
 
 namespace CHMsharp
 {
@@ -73,25 +71,24 @@ namespace CHMsharp
 
         public static SystemFile Read(ChmFile f)
         {
-            List<SystemFileEntry> sfelst = new List<SystemFileEntry>();
-            ChmUnitInfo ui = new ChmUnitInfo();
-            byte[] buf;
+            var sfelst = new List<SystemFileEntry>();
+            var ui = new ChmUnitInfo();
             uint pos = 0, remaining = 0;
 
             if (!f.ResolveObject("/#SYSTEM", ref ui))
                 throw new InvalidOperationException("Could not find SYSTEM file in CHM!");
 
-            buf = new byte[ui.length];
+            var buf = new byte[ui.length];
             remaining = (uint)buf.Length;
 
             if (f.RetrieveObject(ui, ref buf, 0, (long)ui.length) == 0)
                 throw new InvalidOperationException("Could not read SYSTEM file in CHM!");
 
-            Int32 version = 0;
+            var version = 0;
             Unmarshal.ToInt32(ref buf, ref pos, ref remaining, ref version);
 
             for ( ; pos < buf.Length; ) {
-                SystemFileEntry sfe = new SystemFileEntry();
+                var sfe = new SystemFileEntry();
 
                 Unmarshal.ToUInt16(ref buf, ref pos, ref remaining, ref sfe.code);
                 Unmarshal.ToUInt16(ref buf, ref pos, ref remaining, ref sfe.length);
@@ -108,14 +105,8 @@ namespace CHMsharp
             return new SystemFile(version, sfelst.ToArray());
         }
 
-        public SystemFileEntry[] Entries
-        {
-            get { return _entries; }
-        }
+        public SystemFileEntry[] Entries => this._entries;
 
-        public Compatibility Version
-        {
-            get { return _compat; }
-        }
+        public Compatibility Version => this._compat;
     }
 }

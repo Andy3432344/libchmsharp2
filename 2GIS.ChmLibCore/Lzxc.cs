@@ -18,10 +18,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
 
 using LONGINT64 = System.Int64;     /* long long */
 using LONGUINT64 = System.UInt64;   /* unsigned long long */

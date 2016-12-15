@@ -18,9 +18,6 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 using UBYTE = System.Byte;      /* 8 bits exactly    */
 using UWORD = System.UInt16;    /* 16 bits (or more) */

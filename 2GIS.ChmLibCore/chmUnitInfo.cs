@@ -18,18 +18,15 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace CHMsharp
 {
     public struct ChmUnitInfo
     {
-		public UInt64 start;
-		public UInt64 length;
-		public int space;
-		public int flags;
-		public string path;
+        public UInt64 start;
+        public UInt64 length;
+        public int space;
+        public int flags;
+        public string path;
     }
 }
