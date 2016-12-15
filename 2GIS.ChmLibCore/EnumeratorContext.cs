@@ -1,7 +1,7 @@
-﻿namespace CHMsharp
-{
-    using System;
+﻿using System;
 
+namespace CHMsharp
+{
     /// <summary>
     /// The enumerator context.
     /// </summary>
