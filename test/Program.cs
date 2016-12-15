@@ -20,8 +20,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 
 using CHMsharp;
 
@@ -30,6 +28,8 @@ namespace test
     class Program
     {
         static string _outdir;
+
+        private static string _fileName;
 
         static void Main(string[] args)
         {
@@ -58,20 +58,19 @@ namespace test
                 _outdir = args[1];
             }
 
-            Object o = new Object();
-
-            ChmFile chmf = ChmFile.Open(args[0]);
+            _fileName = args[0];
+            var chmf = ChmFile.Open(_fileName);
             chmf.Enumerate(
                 EnumerateLevel.Normal,
                 EnumeratorCallback,
-                o);
+                new EnumeratorContext());
             chmf.Close();
         }
 
-        static EnumerateStatus EnumeratorCallback(ChmFile file, ChmUnitInfo ui, Object context)
+        static EnumerateStatus EnumeratorCallback(ChmFile file, ChmUnitInfo ui, EnumeratorContext context)
         {
             if (!ui.path.EndsWith("/"))
-                Console.WriteLine(file.FileName + ": " + ui.path);
+                Console.WriteLine(_fileName + ": " + ui.path);
 
             if (ui.length > 0) {
                 byte[] buf = new byte[ui.length];
