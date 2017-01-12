@@ -1,31 +1,34 @@
 {
-    "version": "1.0.2",
-    "title": "2GIS.ChmLibCore",
-    "description": "C# port of CHMLib for .NET Core",
-    "copyright": "2GIS",
-    "authors": [ "2GIS" ],
-    "packOptions": {
-        "summary": "C# port of CHMLib for .NET Core",
-        "projectUrl": "https://github.com/2gis/libchmsharp2",
-        "repository": {
-            "type": "git",
-            "url": "https://github.com/2gis/libchmsharp2"
-        },
-        "tags": [ "2GIS", "libchmsharp2", "chmsharp2", "chm", "lzx" ]
+  "version": "1.0.3",
+  "title": "2GIS.ChmLibCore",
+  "description": "C# port of CHMLib for .NET Core",
+  "copyright": "2GIS",
+  "authors": [ "2GIS" ],
+  "packOptions": {
+    "summary": "C# port of CHMLib for .NET Core",
+    "projectUrl": "https://github.com/2gis/libchmsharp2",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/2gis/libchmsharp2"
     },
+    "tags": [ "2GIS", "libchmsharp2", "chmsharp2", "chm", "lzx" ]
+  },
 
-    "dependencies": {
-        "NETStandard.Library": "1.6.1"
-    },
+  "dependencies": {
+    "System.Collections": "4.3.0",
+    "System.IO.FileSystem": "4.3.0",
+    "System.Threading": "4.3.0",
+    "System.Text.Encoding.Extensions": "4.3.0",
+    "System.Runtime.Extensions": "4.3.0"
+  },
 
-    "frameworks": {
-        "netstandard1.4": {
-        }
-    },
+  "frameworks": {
+    "netstandard1.4": { }
+  },
 
-    "scripts": {
-        "postcompile": [
-            "dotnet pack --no-build -c %compile:Configuration%"
-        ]
-    }
+  "scripts": {
+    "postcompile": [
+      "dotnet pack --no-build -c %compile:Configuration%"
+    ]
+  }
 }
