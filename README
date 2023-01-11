@@ -1,1 +1,2 @@
 chmsharp2 is a C# port of CHMLib (http://www.jedrea.com/chmlib/).
+The initial goal is to provide file seek capability in-memory.
